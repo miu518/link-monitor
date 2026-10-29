@@ -5,7 +5,7 @@ compatibility_date = "2024-06-01"
 # 部署前先运行 wrangler kv:namespace create STORE，把返回的 id 填到下面
 [[kv_namespaces]]
 binding = "STORE"
-id = "REPLACE_WITH_KV_NAMESPACE_ID"
+id = "7b9d3c92601d407580141bb9518cac4e"
 
 # 每 5 分钟自动检查一次，可改成 "*/15 * * * *" 等
 [triggers]
