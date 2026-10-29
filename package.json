@@ -1,0 +1,1 @@
+{"description":"批量检查链接存活状态，部署在 Cloudflare Workers 上","devDependencies":{"wrangler":"^3.0.0"},"name":"link-monitor","private":true,"scripts":{"deploy":"wrangler deploy","dev":"wrangler dev"},"version":"1.0.0"}
