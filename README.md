@@ -20,6 +20,24 @@ wrangler deploy
 
 部署成功后会得到一个地址，形如 `https://link-monitor.<你的账号>.workers.dev`，打开就是 Web 界面。
 
+## GitHub Actions 自动部署（推荐）
+
+仓库里已放好 `.github/workflows/deploy.yml`，push 到 `main` 分支会自动部署。只需一次性配置：
+
+1. **创建 KV**（只需一次）：沿用上面部署步骤里的第 1 步，把 `wrangler.toml` 里的
+   `REPLACE_WITH_KV_NAMESPACE_ID` 换成真实 id 并 push。
+2. **创建 API Token**：Cloudflare dashboard → 右上角头像 → My Profile → API Tokens →
+   Create Token，用 `Edit Cloudflare Workers` 模板，再额外加上权限
+   `Account` → `Workers KV Storage` → `Edit`，创建后复制 token（只显示一次）。
+3. **找 Account ID**：dashboard → Workers & Pages → Overview，右侧能看到 Account ID。
+4. **加到 GitHub Secrets**：仓库页面 → Settings → Secrets and variables → Actions →
+   New repository secret，建两个：
+   - `CLOUDFLARE_API_TOKEN` = 第 2 步的 token
+   - `CLOUDFLARE_ACCOUNT_ID` = 第 3 步的 ID
+
+配好之后，每次 push 到 main 都会自动 `wrangler deploy`。注意：在 secrets 和 KV id
+配好之前，Action 会失败，这是预期的，配好后重新 push 一次即可。
+
 ## 用法
 
 - 在页面顶部输入名称（可选）和链接，点「添加」——添加后会立刻检查一次。
